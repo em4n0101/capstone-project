@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    tools:context=".view.gamedetails.GameDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_collapsing_toolbar"
+                android:layout_gravity="center">
+
+                <VideoView
+                    android:id="@+id/videoGameHeader"
+                    android:src="@drawable/no_image_available"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill"
+                    android:contentDescription="@string/content_description_image_game"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loaderAnimationGameHeaderVideoView"
+                    android:layout_width="@dimen/dimen_spinner_header_game"
+                    android:layout_height="@dimen/dimen_spinner_header_game"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loader_animation" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_shape_gradient"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/shape_gradient" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loaderAnimationGamePosterView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/gameDetailImageView"
+                app:layout_constraintEnd_toEndOf="@+id/gameDetailImageView"
+                app:layout_constraintStart_toStartOf="@+id/gameDetailImageView"
+                app:layout_constraintTop_toTopOf="@+id/gameDetailImageView"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader_animation" />
+
+            <ImageView
+                android:id="@+id/gameDetailImageView"
+                android:layout_width="@dimen/detail_poster_width"
+                android:layout_height="@dimen/detail_poster_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:transitionName="posterImageTransactionName"
+                android:contentDescription="@string/content_description_image_game"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/favoriteAnimationView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/favorite_animation" />
+
+            <TextView
+                android:id="@+id/gameDetailTitleTextView"
+                style="@style/game_detail_label_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:transitionName="nameGameTransaction"
+                app:layout_constraintEnd_toStartOf="@+id/favoriteAnimationView"
+                app:layout_constraintStart_toEndOf="@+id/gameDetailImageView"
+                app:layout_constraintTop_toTopOf="@+id/gameDetailImageView"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/gameDetailGenreTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/game_detail_label_info"
+                android:layout_marginTop="16dp"
+                tools:text="Genre"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/gameDetailImageView"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailTitleTextView" />
+
+            <TextView
+                android:id="@+id/gameDetailPremiereDateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                style="@style/game_detail_label_info"
+                tools:text="Premiere"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/gameDetailImageView"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailGenreTextView" />
+
+            <TextView
+                android:id="@+id/gameDetailRatingTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                style="@style/game_detail_label_info"
+                tools:text="Rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/gameDetailImageView"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailPremiereDateTextView" />
+
+            <TextView
+                android:id="@+id/gameDetailDescriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                style="@style/game_detail_label_summary"
+                tools:text="Summary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailImageView" />
+
+            <TextView
+                android:id="@+id/gameDetailSeasonsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Screenshots"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailDescriptionTextView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gameDetailScreenshotsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gameDetailSeasonsTextView" />
+
+
+            <TextView
+                android:id="@+id/gameDetailCastTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Cast"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gameDetailScreenshotsRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gameDetailCastRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gameDetailCastTextView" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loaderAnimationView"
+                android:layout_width="@dimen/loader_size"
+                android:layout_height="@dimen/loader_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:visibility="gone"
+                app:lottie_rawRes="@raw/loader_animation" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

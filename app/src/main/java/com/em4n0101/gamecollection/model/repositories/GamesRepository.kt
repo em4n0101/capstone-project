@@ -7,4 +7,6 @@ class GamesRepository (private val remoteApi: RemoteApi) {
      * Game operations
      */
     suspend fun getTopGames() = remoteApi.getTopGames()
+
+    suspend fun getGameDetails(gameId: Int) = remoteApi.getGameDetails(gameId)
 }

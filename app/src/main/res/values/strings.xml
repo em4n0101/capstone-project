@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Game Collection</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="error_message_not_network_available_get_data">Please turn on your mobile data or use Wi-fi to search for data</string>
+    <string name="error_message_not_network_available_more_data">Please turn on your mobile data or use Wi-fi for more information</string>
+
+    <string name="content_description_image_game">show image resource</string>
+    <string name="content_description_image_screenshot">screenshot image resource</string>
+
+    <string name="error_network_download_data">Something gone wrong, please try again</string>
+
+    <string name="try_again_to_get_top_games">Something go wrong requesting the top games</string>
+    <string name="screenshots_title">Screenshots</string>
 </resources>

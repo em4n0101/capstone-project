@@ -1,13 +1,13 @@
-package com.em4n0101.gamecollection.viewmodel
+package com.em4n0101.gamecollection.viewmodel.topgames
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.em4n0101.gamecollection.model.repositories.GamesRepository
-import com.em4n0101.gamecollection.model.response.Failure
-import com.em4n0101.gamecollection.model.response.Game
-import com.em4n0101.gamecollection.model.response.Success
+import com.em4n0101.gamecollection.model.Failure
+import com.em4n0101.gamecollection.model.Game
+import com.em4n0101.gamecollection.model.Success
 import kotlinx.coroutines.launch
 
 class TopGamesViewModel(private val repository: GamesRepository): ViewModel() {

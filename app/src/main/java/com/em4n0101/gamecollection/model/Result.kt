@@ -1,4 +1,4 @@
-package com.em4n0101.gamecollection.model.response
+package com.em4n0101.gamecollection.model
 
 sealed class Result <out T: Any>
 
