@@ -1,33 +1,24 @@
 package com.em4n0101.gamecollection.view.topgames
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.em4n0101.gamecollection.R
+import com.em4n0101.gamecollection.model.response.Game
+import com.em4n0101.gamecollection.networking.NetworkingStatusChecker
+import com.em4n0101.gamecollection.utils.toast
+import com.em4n0101.gamecollection.viewmodel.TopGamesViewModel
+import kotlinx.android.synthetic.main.fragment_top_games.*
+import org.koin.android.ext.android.inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TopGamesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TopGamesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val viewModel: TopGamesViewModel by inject()
+    private val networkingStatusChecker by lazy {
+        NetworkingStatusChecker(activity?.getSystemService(ConnectivityManager::class.java))
     }
 
     override fun onCreateView(
@@ -38,23 +29,36 @@ class TopGamesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_top_games, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TopGamesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TopGamesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.let {
+            setupObservables()
+        }
+
+        requestTopGamesButton.setOnClickListener {
+            networkingStatusChecker.performIfConnectedToInternet(::displayNotNetworkAvailableMessage) {
+                viewModel.getTopGames()
             }
+        }
+    }
+
+    private fun setupObservables() {
+        viewModel.loadingLiveData.observe(viewLifecycleOwner, Observer { value: Boolean ->
+            //loaderAnimationView.isVisible = value
+            println("LIVE-DATA loading $value")
+        })
+        viewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
+            // activity?.toast(getString(R.string.error_network_download_data))
+            println("LIVE-DATA error $it")
+        })
+        viewModel.topGamesLiveData.observe(viewLifecycleOwner, Observer { value: List<Game> ->
+            //updateUiWithShowList(value)
+            println("LIVE-DATA games $value")
+        })
+    }
+
+    private fun displayNotNetworkAvailableMessage() {
+        activity?.toast(getString(R.string.error_message_not_network_available_get_data))
     }
 }
