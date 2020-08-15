@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/card_elevation"
     android:layout_margin="@dimen/margin_small"
+    android:transitionName="genericImageHolderTransaction"
+    android:id="@+id/cardView"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -38,15 +40,23 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_description_image_game"
             android:scaleType="centerCrop"
-            android:transitionName="genericImageHolderTransaction"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_gradient"
+            app:layout_constraintBottom_toBottomOf="@+id/itemBigPoster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/itemBigTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/primaryDarkColor"
             android:fontFamily="@font/montserrat_bold"
             android:padding="@dimen/padding_small"
             android:textColor="@color/white"
@@ -55,6 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="My game" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

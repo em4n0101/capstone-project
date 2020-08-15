@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -71,21 +73,20 @@ class TopGamesFragment : Fragment() {
         }
     }
 
-    private fun listItemPressed(game: Game) {
+    private fun listItemPressed(game: Game, gameView: View) {
         view?.let {
             val intent = Intent(context, GameDetailsActivity::class.java)
             intent.putExtra(MainActivity.EXTRA_GAME, game)
-            startActivity(intent)
-            /*
-            val imagePair = Pair.create(posterImage, "posterImageTransactionName")
-            val titlePair = Pair.create(titleView, "nameShowTransaction")
+
+            val imagePair = Pair.create(gameView, "posterImageTransactionName")
+            //val titlePair = Pair.create(titleView, "nameShowTransaction")
 
             val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 requireActivity(),
-                imagePair,
-                titlePair
+                imagePair
+                //titlePair
             )
-            startActivity(intent, activityOptions.toBundle())*/
+            startActivity(intent, activityOptions.toBundle())
         }
     }
 }

@@ -1,25 +1,21 @@
 package com.em4n0101.gamecollection.view.gamedetails
 
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
-import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.em4n0101.gamecollection.R
 import com.em4n0101.gamecollection.model.Game
+import com.em4n0101.gamecollection.model.Genre
+import com.em4n0101.gamecollection.model.Platform
 import com.em4n0101.gamecollection.model.ScreenShot
 import com.em4n0101.gamecollection.model.response.GameDetailsResponse
 import com.em4n0101.gamecollection.networking.NetworkingStatusChecker
-import com.em4n0101.gamecollection.utils.removeHtmlTags
-import com.em4n0101.gamecollection.utils.setupImageForViewHolder
-import com.em4n0101.gamecollection.utils.toast
+import com.em4n0101.gamecollection.utils.*
 import com.em4n0101.gamecollection.view.main.MainActivity
 import com.em4n0101.gamecollection.viewmodel.gamedetails.GameDetailsViewModel
 import kotlinx.android.synthetic.main.activity_game_details.*
@@ -61,6 +57,9 @@ class GameDetailsActivity : AppCompatActivity() {
 
     private fun updateUiWithGame(game: Game) {
         gameDetailTitleTextView.text = game.name
+        gameDetailRankTextView.text = getRankReadableForGame(game)
+        gameDetailReleaseDateTextView.text = formatGameReleased(game)
+        gameDetailPlaytimeTextView.text = formatPlayTime(game)
         game.clip?.let {
             playGameClip(it.clip)
         }
@@ -71,6 +70,8 @@ class GameDetailsActivity : AppCompatActivity() {
             true
         )
         game.short_screenshots?.let { setupScreenshots(it) }
+        game.parent_platforms?.let { setupPlatforms(it) }
+        game.genres?.let { setupGenres(it) }
     }
 
     private fun playGameClip(videoUrl: String) {
@@ -86,9 +87,9 @@ class GameDetailsActivity : AppCompatActivity() {
 
     private fun setupScreenshots(screenshotList: List<ScreenShot>) {
         if (gameDetailScreenshotsRecyclerView != null) {
-            gameDetailSeasonsTextView.text = getString(R.string.screenshots_title)
+            gameDetailScreenshotsTextView.text = getString(R.string.screenshots_title)
             val adapter = ScreenshotAdapter(::listScreenshotItemPressed)
-            adapter.setData(screenshotList)
+            adapter.setData(screenshotList.filter { screenShot -> screenShot.id != -1 })
             gameDetailScreenshotsRecyclerView.layoutManager = LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
@@ -96,6 +97,32 @@ class GameDetailsActivity : AppCompatActivity() {
             )
             gameDetailScreenshotsRecyclerView.adapter = adapter
         }
+    }
+
+    private fun setupPlatforms(platformList: List<Platform>?) {
+        platformList?.let {
+            gameDetailPlatformsTextView.text = getString(R.string.platforms_title)
+            val adapter = PlatformAdapter()
+            adapter.setData(it)
+            gameDetailPlatformsRecyclerView.layoutManager = LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            gameDetailPlatformsRecyclerView.adapter = adapter
+        }
+    }
+
+    private fun setupGenres(genreList: List<Genre>) {
+        gameDetailGenresTextView.text = getString(R.string.genres_title)
+        val adapter = GenreAdapter()
+        adapter.setData(genreList)
+        gameDetailGenresRecyclerView.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        gameDetailGenresRecyclerView.adapter = adapter
     }
 
     private fun listScreenshotItemPressed(screenShot: ScreenShot) {

@@ -10,7 +10,7 @@ data class Game (
     val id: Int?,
     val slug: String,
     val name: String,
-    val released: String,
+    val released: String?,
     val background_image: String,
     val rating: Float?,
     val rating_top: Float?,
