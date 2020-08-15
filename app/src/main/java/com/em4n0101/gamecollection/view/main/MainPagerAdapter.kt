@@ -12,16 +12,16 @@ class MainPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val fragments = listOf(
-        HomeFragment(),
+        //HomeFragment(),
         SearchFragment(),
-        TopGamesFragment(),
-        ProfileFragment()
+        TopGamesFragment()
+       // ProfileFragment()
     )
     private val titles = listOf(
-        "Home",
+       // "Home",
         "Search",
-        "Top 20",
-        "Profile"
+        "Top 20"
+      //  "Profile"
     )
 
     override fun getCount(): Int = fragments.size

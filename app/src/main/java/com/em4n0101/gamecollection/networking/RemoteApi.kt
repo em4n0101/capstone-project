@@ -26,4 +26,14 @@ class RemoteApi(private val remoteApiService: RemoteApiService) {
     } catch (error: Throwable) {
         Failure(error)
     }
+
+    /**
+     * Search for the games according to the user input
+     */
+    suspend fun searchForAGame(inputToSearch: String): Result<TopGamesResponse> = try {
+        val data = remoteApiService.searchGamesForUserInput(inputToSearch)
+        Success(data)
+    } catch (error: Throwable) {
+        Failure(error)
+    }
 }

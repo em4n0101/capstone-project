@@ -9,4 +9,7 @@ class GamesRepository (private val remoteApi: RemoteApi) {
     suspend fun getTopGames() = remoteApi.getTopGames()
 
     suspend fun getGameDetails(gameId: Int) = remoteApi.getGameDetails(gameId)
+
+    suspend fun getSearchForAGame(inputToSearch: String)
+            = remoteApi.searchForAGame(inputToSearch)
 }

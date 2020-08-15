@@ -24,6 +24,7 @@
         style="@style/game_detail_label_summary"
         android:text="@string/try_again_to_get_top_games"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
