@@ -103,7 +103,7 @@ class GameDetailsActivity : AppCompatActivity() {
     }
 
     private fun updateUiWithGameAdditional(gameAdditional: GameDetailsResponse) {
-        gameDetailDescriptionTextView.text = gameAdditional.description.removeHtmlTags()
+        gameDetailDescriptionExpandableTextView.text = gameAdditional.description.removeHtmlTags()
     }
 
     // Observables

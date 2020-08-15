@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.gamedetails.GameDetailsActivity"></activity>
-        <activity android:name=".view.main.MainActivity">
+        <activity android:name=".view.gamedetails.GameDetailsActivity" />
+        <activity android:name=".view.main.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
