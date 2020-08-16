@@ -1,16 +1,9 @@
-package com.em4n0101.gamecollection.model
+package com.em4n0101.gamecollection.model.database
 
-import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
-import kotlinx.serialization.Serializable
+import com.em4n0101.gamecollection.model.*
 
-@Entity(tableName = "games_table")
-@Serializable
-@Parcelize
-data class Game (
-    @PrimaryKey
+class GameModel (
     val id: Int?,
     val slug: String,
     val name: String,
@@ -22,7 +15,6 @@ data class Game (
     val playtime: Float?,
     val parent_platforms: List<Platform>?,
     val genres: List<Genre>?,
-//    val stores: List<Store>?,
     val clip: Clip?,
     val short_screenshots: List<ScreenShot>?
-) : Parcelable
+)

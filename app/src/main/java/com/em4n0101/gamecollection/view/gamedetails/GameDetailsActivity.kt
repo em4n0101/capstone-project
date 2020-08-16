@@ -27,6 +27,7 @@ class GameDetailsActivity : AppCompatActivity() {
         NetworkingStatusChecker(getSystemService(ConnectivityManager::class.java))
     }
     private var currentGame: Game? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +47,26 @@ class GameDetailsActivity : AppCompatActivity() {
             getAdditionalInfoForGame(it)
         }
 
-        /*favoriteAnimationView.setOnClickListener {
-            currentShow?.let {
+        favoriteAnimationView.setOnClickListener {
+            currentGame?.let {
                 isFavorite = !isFavorite
-                if (isFavorite) viewModel.saveShow(it) else viewModel.deleteShowByName(it.name)
+                if (isFavorite) viewModel.saveGame(it) else viewModel.deleteGameById(it.id ?: 0)
                 animateFavoriteView()
             }
-        }*/
+        }
+    }
+
+    private fun animateFavoriteView() {
+        currentGame?.let {
+            favoriteAnimationView.apply {
+                if (isFavorite) {
+                    playAnimation()
+                } else {
+                    cancelAnimation()
+                    progress = 0.0f
+                }
+            }
+        }
     }
 
     private fun updateUiWithGame(game: Game) {
@@ -143,6 +157,12 @@ class GameDetailsActivity : AppCompatActivity() {
         })
         viewModel.gameDetailsLiveData.observe(this, Observer { additionalInfo: GameDetailsResponse ->
             updateUiWithGameAdditional(additionalInfo)
+        })
+        viewModel.getGameById(game.id ?: 0).observe(this, Observer {
+            if (it != null) {
+                isFavorite = true
+                animateFavoriteView()
+            }
         })
     }
 

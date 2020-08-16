@@ -30,8 +30,8 @@ class HomeFragment : Fragment() {
 
         fragmentManager?.beginTransaction()
             ?.replace(R.id.fragmentGenre1, fragmentGenre1)
-            ?.replace(R.id.fragmentGenre2, fragmentGenre2)
-            ?.replace(R.id.fragmentGenre3, fragmentGenre3)
+           // ?.replace(R.id.fragmentGenre2, fragmentGenre2)
+           // ?.replace(R.id.fragmentGenre3, fragmentGenre3)
             ?.commit()
     }
 }

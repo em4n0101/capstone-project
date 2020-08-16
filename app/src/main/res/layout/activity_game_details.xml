@@ -117,7 +117,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/gameDetailPlaytimeTextView"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="false"
-                android:visibility="invisible"
                 app:lottie_rawRes="@raw/favorite_animation" />
 
             <TextView
