@@ -12,4 +12,6 @@ class GamesRepository (private val remoteApi: RemoteApi) {
 
     suspend fun getSearchForAGame(inputToSearch: String)
             = remoteApi.searchForAGame(inputToSearch)
+
+    suspend fun getGamesForGenre(genreName: String) = remoteApi.searchGamesForGenre(genreName)
 }

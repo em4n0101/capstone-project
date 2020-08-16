@@ -36,4 +36,14 @@ class RemoteApi(private val remoteApiService: RemoteApiService) {
     } catch (error: Throwable) {
         Failure(error)
     }
+
+    /**
+     * Search for the games according to his genre
+     */
+    suspend fun searchGamesForGenre(genreName: String): Result<TopGamesResponse> = try {
+        val data = remoteApiService.searchGamesForGenre(genreName)
+        Success(data)
+    } catch (error: Throwable) {
+        Failure(error)
+    }
 }

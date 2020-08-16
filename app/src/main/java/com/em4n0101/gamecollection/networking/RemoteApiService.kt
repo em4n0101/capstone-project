@@ -15,4 +15,7 @@ interface RemoteApiService {
 
     @GET("games?ordering=-added")
     suspend fun searchGamesForUserInput(@Query("search") search: String): TopGamesResponse
+
+    @GET("games?ordering=-added")
+    suspend fun searchGamesForGenre(@Query("genres") genres: String): TopGamesResponse
 }

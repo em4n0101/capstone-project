@@ -19,4 +19,5 @@
     <string name="click_on_the_search_icon_to_start">Click on the search icon to start</string>
     <string name="error_message_not_network_available_search">Please turn on your mobile data or use Wi-fi to search for games</string>
     <string name="hintSearchGame">Search game</string>
+    <string name="title_for_genre_recommendations">Best of %1$s</string>
 </resources>
