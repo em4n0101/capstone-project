@@ -14,10 +14,10 @@ class GameDetailsViewModel(private val repository: GamesRepository): ViewModel()
         repository.insertGame(game)
     }
 
-    fun getGameById(id: Int) = repository.getGameBy(id).asLiveData()
+    fun getGameById(id: Int) = repository.getFavoriteGameBy(id).asLiveData()
 
     fun deleteGameById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteGameBy(id)
+        repository.deleteFavoriteGameBy(id)
     }
 
     private val _loadingLiveData = MutableLiveData<Boolean>()

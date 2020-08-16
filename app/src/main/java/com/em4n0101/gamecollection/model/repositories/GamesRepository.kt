@@ -24,10 +24,10 @@ class GamesRepository (private val remoteApi: RemoteApi, private val databaseDao
      */
     suspend fun insertGame(game: Game) = databaseDao.insertGame(game)
 
-    fun getGame(): Flow<List<Game>> = databaseDao.getAllGames()
+    fun getFavoriteGames(): Flow<List<Game>> = databaseDao.getAllGames()
 
-    fun getGameBy(id: Int): Flow<Game?> = databaseDao.getGameBy(id)
+    fun getFavoriteGameBy(id: Int): Flow<Game?> = databaseDao.getGameBy(id)
 
-    suspend fun deleteGameBy(id: Int) = databaseDao.deleteGameBy(id)
+    suspend fun deleteFavoriteGameBy(id: Int) = databaseDao.deleteGameBy(id)
 
 }

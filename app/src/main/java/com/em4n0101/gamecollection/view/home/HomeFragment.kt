@@ -27,11 +27,11 @@ class HomeFragment : Fragment() {
         fragmentGenre1 = InnerFragment("sports")
         fragmentGenre2 = InnerFragment("action")
         fragmentGenre3 = InnerFragment("indie")
-
+/*
         fragmentManager?.beginTransaction()
             ?.replace(R.id.fragmentGenre1, fragmentGenre1)
            // ?.replace(R.id.fragmentGenre2, fragmentGenre2)
            // ?.replace(R.id.fragmentGenre3, fragmentGenre3)
-            ?.commit()
+            ?.commit()*/
     }
 }
